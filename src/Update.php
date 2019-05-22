@@ -20,9 +20,9 @@ use Exception;
 
 class Update
 {
-    const GITHUB_URL_INFO = 'https://api.github.com/repos/hongyukeji/wmt-update'; // 获取信息
     const GITHUB_URL_LATEST = 'https://api.github.com/repos/hongyukeji/wmt-update/releases/latest';   // 获取最新版本
     const GITHUB_URL_RELEASES = 'https://api.github.com/repos/hongyukeji/wmt-update/releases';    // 获取版本列表
+    const GITHUB_URL_INFO = 'https://api.github.com/repos/hongyukeji/wmt-update'; // 获取信息
 
     public function checkUpdate()
     {
@@ -41,10 +41,10 @@ class Update
                 $response = $client->request('GET', self::GITHUB_URL_LATEST);
                 break;
             case 'releases':
-                $response = $client->request('GET', self::GITHUB_URL_INFO);
+                $response = $client->request('GET', self::GITHUB_URL_RELEASES);
                 break;
             default :
-                $response = $client->request('GET', self::GITHUB_URL_RELEASES);
+                $response = $client->request('GET', self::GITHUB_URL_INFO);
         }
 
         if ($response->getStatusCode() !== 200) {
