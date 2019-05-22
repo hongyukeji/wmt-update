@@ -24,19 +24,41 @@ class Update
     const GITHUB_LABEL_RELEASES = 'releases';    // 版本列表标识
     const GITHUB_LABEL_INFO = 'info'; // 项目信息标识
 
-    const GITHUB_URL_LATEST = 'https://api.github.com/repos/hongyukeji/wmt-update/releases/latest';   // 获取最新版本
-    const GITHUB_URL_RELEASES = 'https://api.github.com/repos/hongyukeji/wmt-update/releases';    // 获取版本列表
-    const GITHUB_URL_INFO = 'https://api.github.com/repos/hongyukeji/wmt-update'; // 获取项目信息
+    const GITHUB_URL_LATEST = 'https://api.github.com/repos/hongyukeji/wmt-update/releases/latest';   // 最新版本链接
+    const GITHUB_URL_RELEASES = 'https://api.github.com/repos/hongyukeji/wmt-update/releases';    // 版本列表链接
+    const GITHUB_URL_INFO = 'https://api.github.com/repos/hongyukeji/wmt-update'; // 项目信息链接
 
     /**
-     * 检查更新
+     * 获取最新版本
      *
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getUpdateList()
+    public function getLatest()
+    {
+        return $this->sendRequest(self::GITHUB_LABEL_LATEST);
+    }
+
+    /**
+     * 获取版本列表
+     *
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getReleases()
     {
         return $this->sendRequest(self::GITHUB_LABEL_RELEASES);
+    }
+
+    /**
+     * 获取项目信息
+     *
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getInfo()
+    {
+        return $this->sendRequest(self::GITHUB_LABEL_INFO);
     }
 
     /**
