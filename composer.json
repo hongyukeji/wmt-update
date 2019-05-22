@@ -1,0 +1,32 @@
+{
+    "name": "hongyukeji/wmt-update",
+    "description": "The is wmt update module.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "shadow",
+            "email": "admin@hongyuvip.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "laravel/framework": "5.5.*",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hongyukeji\\WmtUpdate\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+            ],
+            "providers": [
+                "Hongyukeji\\WmtUpdate\\UpdateServiceProvider"
+            ],
+            "aliases": {
+            }
+        }
+    }
+}
