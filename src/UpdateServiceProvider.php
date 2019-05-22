@@ -39,7 +39,7 @@ class UpdateServiceProvider extends ServiceProvider
         }
 
         $this->app->bind(Update::class, function () {
-            return Update::new();
+            return new Update();
         });
 
         $this->app->alias(Update::class, 'update');

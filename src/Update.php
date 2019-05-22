@@ -32,7 +32,7 @@ class Update
     /*
      * 发送请求
      */
-    public function sendRequest($type)
+    public function sendRequest($type = null)
     {
         $client = new \GuzzleHttp\Client();
 
