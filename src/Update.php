@@ -20,31 +20,49 @@ use Exception;
 
 class Update
 {
+    const GITHUB_LABEL_LATEST = 'latest';   // 最新版本标识
+    const GITHUB_LABEL_RELEASES = 'releases';    // 版本列表标识
+    const GITHUB_LABEL_INFO = 'info'; // 项目信息标识
+
     const GITHUB_URL_LATEST = 'https://api.github.com/repos/hongyukeji/wmt-update/releases/latest';   // 获取最新版本
     const GITHUB_URL_RELEASES = 'https://api.github.com/repos/hongyukeji/wmt-update/releases';    // 获取版本列表
-    const GITHUB_URL_INFO = 'https://api.github.com/repos/hongyukeji/wmt-update'; // 获取信息
+    const GITHUB_URL_INFO = 'https://api.github.com/repos/hongyukeji/wmt-update'; // 获取项目信息
 
+    /**
+     * 检查更新
+     *
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function checkUpdate()
     {
-        //
+        return $this->sendRequest('releases');
     }
 
-    /*
+    /**
      * 发送请求
+     *
+     * @param null $type
+     * @param null $github_url
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function sendRequest($type = null)
+    public function sendRequest($type = null, $github_url = null)
     {
         $client = new \GuzzleHttp\Client();
-
-        switch ($type) {
-            case 'latest':
-                $response = $client->request('GET', self::GITHUB_URL_LATEST);
-                break;
-            case 'releases':
-                $response = $client->request('GET', self::GITHUB_URL_RELEASES);
-                break;
-            default :
-                $response = $client->request('GET', self::GITHUB_URL_INFO);
+        if ($github_url && !$type) {
+            $response = $client->request('GET', $github_url);
+        } else {
+            switch ($type) {
+                case self::GITHUB_LABEL_LATEST:
+                    $response = $client->request('GET', self::GITHUB_URL_LATEST);
+                    break;
+                case self::GITHUB_LABEL_RELEASES:
+                    $response = $client->request('GET', self::GITHUB_URL_RELEASES);
+                    break;
+                default :
+                    $response = $client->request('GET', self::GITHUB_URL_INFO);
+            }
         }
 
         if ($response->getStatusCode() !== 200) {
