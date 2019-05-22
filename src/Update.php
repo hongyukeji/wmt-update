@@ -34,9 +34,9 @@ class Update
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function checkUpdate()
+    public function getUpdateList()
     {
-        return $this->sendRequest('releases');
+        return $this->sendRequest(self::GITHUB_LABEL_RELEASES);
     }
 
     /**
