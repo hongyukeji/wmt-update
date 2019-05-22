@@ -43,25 +43,26 @@ class Update
      * 发送请求
      *
      * @param null $type
+     * @param string $method
      * @param null $github_url
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function sendRequest($type = null, $github_url = null)
+    public function sendRequest($type = null, $method = 'GET', $github_url = null)
     {
         $client = new \GuzzleHttp\Client();
         if ($github_url && !$type) {
-            $response = $client->request('GET', $github_url);
+            $response = $client->request($method, $github_url);
         } else {
             switch ($type) {
                 case self::GITHUB_LABEL_LATEST:
-                    $response = $client->request('GET', self::GITHUB_URL_LATEST);
+                    $response = $client->request($method, self::GITHUB_URL_LATEST);
                     break;
                 case self::GITHUB_LABEL_RELEASES:
-                    $response = $client->request('GET', self::GITHUB_URL_RELEASES);
+                    $response = $client->request($method, self::GITHUB_URL_RELEASES);
                     break;
                 default :
-                    $response = $client->request('GET', self::GITHUB_URL_INFO);
+                    $response = $client->request($method, self::GITHUB_URL_INFO);
             }
         }
 
