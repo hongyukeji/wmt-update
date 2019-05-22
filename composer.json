@@ -16,7 +16,10 @@
     "autoload": {
         "psr-4": {
             "Hongyukeji\\WmtUpdate\\": "src"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "extra": {
         "laravel": {
@@ -26,6 +29,7 @@
                 "Hongyukeji\\WmtUpdate\\UpdateServiceProvider"
             ],
             "aliases": {
+                "Update": "Hongyukeji\\WmtUpdate\\Facades\\Update"
             }
         }
     }
